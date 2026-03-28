@@ -102,10 +102,17 @@ PIL_GRAY   = (200, 210, 215)
 # フォント
 # =========================================================
 FONT_CANDIDATES = [
+    # Windows
     ("C:/Windows/Fonts/meiryo.ttc",   "Meiryo"),
     ("C:/Windows/Fonts/msgothic.ttc", "MSGothic"),
     ("C:/Windows/Fonts/YuGothR.ttc",  "YuGothic"),
+    # Mac
     ("/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc", "HiraginoKaku"),
+    # Linux: IPAフォント（TTFアウトライン・reportlab対応）
+    ("/usr/share/fonts/opentype/ipafont-gothic/ipag.ttf",    "IPAGothic"),
+    ("/usr/share/fonts/opentype/ipaexfont-gothic/ipaexg.ttf","IPAexGothic"),
+    ("/usr/share/fonts/truetype/ipafont/ipag.ttf",           "IPAGothic2"),
+    ("/usr/share/fonts/ipa/ipag.ttf",                        "IPAGothic3"),
 ]
 FONT_PATH = next((p for p, _ in FONT_CANDIDATES if os.path.exists(p)), None)
 
