@@ -1,0 +1,10 @@
+# 生成済み出力ファイル
+output_*/
+*.pdf
+illust_*.png
+test_*.py
+test_output.*
+
+# Python
+__pycache__/
+*.pyc
