@@ -188,6 +188,9 @@ FONT_CANDIDATES = [
 ]
 FONT_PATH = next((p for p, _ in FONT_CANDIDATES if os.path.exists(p)), None)
 
+# マスコット画像（右下に配置）※不要な場合は None に
+MASCOT_PATH = r"C:\Users\haiki\OneDrive\デスクトップ\スキル\スキル開発\スライド\hamster.png"
+
 def setup_rl_fonts():
     for path, name in FONT_CANDIDATES:
         if os.path.exists(path):
@@ -260,6 +263,13 @@ def sl_card(c, x, y, w, h):
 def sl_divider(c, x, y, w):
     c.setStrokeColor(RL_DIVIDER); c.setLineWidth(1); c.line(x, y, x+w, y)
 
+def sl_mascot(c):
+    """マスコット画像を右下に描画する"""
+    if MASCOT_PATH and os.path.exists(MASCOT_PATH):
+        mh = 90
+        c.drawImage(MASCOT_PATH, W_SL - mh - 8, FOOTER_H + 2, mh, mh,
+                    preserveAspectRatio=True, mask='auto')
+
 # ---------- slide_intro: 動的スロット配置でbulletsを均等分散 ----------
 def slide_intro(c, data):
     sl_bg(c); sl_header(c, data['title']); sl_footer(c, data['page'], data['total'], data['theme'])
@@ -292,6 +302,7 @@ def slide_intro(c, data):
                 c.setFillColor(RL_TEXT); c.setFont(RL_FONT, 14)
                 for j, ln in enumerate(lines[:2]):
                     c.drawString(x+pad+18, by-j*18, ln)
+    sl_mascot(c)
     c.showPage()
 
 # ---------- slide_before: 動的スロット配置でpointsを均等分散 ----------
@@ -336,6 +347,7 @@ def slide_before(c, data):
         c.setFillColor(RL_ACCENT); c.rect(SL_MARGIN, BODY_BOTTOM, W_SL-SL_MARGIN*2, concl_h, fill=1, stroke=0)
         c.setFillColor(RL_WHITE); c.setFont(RL_FONT_BOLD, 15)
         c.drawCentredString(W_SL/2, BODY_BOTTOM+12, data['conclusion'])
+    sl_mascot(c)
     c.showPage()
 
 # ---------- slide_illust: PNG画像をスライドに埋め込む ----------
@@ -361,6 +373,7 @@ def slide_illust(c, data):
                W_SL-SL_MARGIN*2, BODY_H-pad, fill=1, stroke=0)
         c.drawImage(img_path, dx, dy, dw, dh,
                     preserveAspectRatio=True, mask='auto')
+    sl_mascot(c)
     c.showPage()
 
 def slide_bullets(c, data):
@@ -384,6 +397,7 @@ def slide_bullets(c, data):
         c.setFillColor(RL_ACCENT); c.rect(SL_MARGIN, BODY_BOTTOM, cw, ch_, fill=1, stroke=0)
         c.setFillColor(RL_WHITE); c.setFont(RL_FONT_BOLD, 15)
         c.drawCentredString(W_SL/2, BODY_BOTTOM+11, data['conclusion'])
+    sl_mascot(c)
     c.showPage()
 
 def slide_categories(c, data):
@@ -415,6 +429,7 @@ def slide_categories(c, data):
         c.setFillColor(RL_ACCENT); c.rect(SL_MARGIN, BODY_BOTTOM, W_SL-SL_MARGIN*2, ch_, fill=1, stroke=0)
         c.setFillColor(RL_WHITE); c.setFont(RL_FONT_BOLD, 15)
         c.drawCentredString(W_SL/2, BODY_BOTTOM+11, data['conclusion'])
+    sl_mascot(c)
     c.showPage()
 
 def slide_warnings(c, data):
@@ -437,6 +452,7 @@ def slide_warnings(c, data):
         c.setFillColor(RL_HEADER); c.rect(SL_MARGIN, BODY_BOTTOM, cw, ch_, fill=1, stroke=0)
         c.setFillColor(RL_WHITE); c.setFont(RL_FONT_BOLD, 15)
         c.drawCentredString(W_SL/2, BODY_BOTTOM+11, data['conclusion'])
+    sl_mascot(c)
     c.showPage()
 
 def generate_slides(slides_data, output_path):
